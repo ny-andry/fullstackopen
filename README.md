@@ -1,5 +1,5 @@
 # fullstackopen
-- Part 0
+- Part 0, done
 - Part 1
 - Part 2
 - Part 3
