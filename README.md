@@ -1,6 +1,6 @@
 # fullstackopen
 - Part 0, done
-- Part 1
+- Part 1, working on it
 - Part 2
 - Part 3
 - Part 4
