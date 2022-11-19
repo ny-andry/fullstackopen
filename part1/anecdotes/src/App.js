@@ -33,7 +33,7 @@ const App = () => {
 
   // Voting function
   const handleVote = () => {
-    const spreadVotes =  [...votes] ;
+    const spreadVotes = [...votes];
     // console.log(spreadVotes);
     spreadVotes[selected] += 1;
     return setVotes(spreadVotes);
