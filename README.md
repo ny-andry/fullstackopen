@@ -1,8 +1,8 @@
-# FullStackOpen 2022
-
+# FullStackOpen 2022 🌱
+ 
 - [x] Part 0
 - [x] Part 1
-- [ ] Part 2
+- [ ] Part 2 (Working 📌)
 - [ ] Part 3
 - [ ] Part 4
 - [ ] Part 5
