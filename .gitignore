@@ -1,5 +1,19 @@
-copy/
+react-app-default/
+
 part1/anecdotes/node_modules
 part1/courseinfo/node_modules
 part1/unicafe/node_modules
 
+part2/courseinfo/node_modules
+part2/notes
+part2/phonebook/node_modules
+
+part3/
+
+part4/
+
+part5/
+
+part6/
+
+part7/
