@@ -1,20 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import axios from "axios";
 import PersonForm from "./components/PersonForm";
 import Filter from "./components/Filter";
 import Persons from "./components/Persons";
 
 const App = () => {
-  
   // Hard-coded dummy data
-  const [persons, setPersons] = useState([
-    { name: "Arto Hellas", number: "040-123456", id: 1 },
-    { name: "Ada Lovelace", number: "39-44-5323523", id: 2 },
-    { name: "Dan Abramov", number: "12-43-234345", id: 3 },
-    { name: "Mary Poppendieck", number: "39-23-6423122", id: 4 },
-  ]);
+  const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [newText, setText] = useState("");
+
+  // Fetching data from the server
+  useEffect(() => {
+    const eventHandler = (response) => {
+      setPersons(response.data);
+    };
+
+    const promise = axios.get("http://localhost:3001/persons");
+    promise.then(eventHandler);
+  }, []);
 
   // Person to display if-else
   const personDisplay =
@@ -49,7 +54,7 @@ const App = () => {
         number: newNumber,
         id: persons.length + 1,
       };
-      // Concatenate new entry to perrsons
+      // Concatenate new entry to persons
       setPersons(persons.concat(newPerson));
     }
   };
