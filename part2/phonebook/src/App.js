@@ -45,9 +45,22 @@ const App = () => {
       const newPerson = {
         name: newName,
         number: newNumber,
-        id: persons.length + 1,
+        // id: persons.length + 1,
       };
-      service.create(newPerson).then((newPerson) => setPersons(persons.concat(newPerson)))
+      service
+        .create(newPerson)
+        .then((newPerson) => setPersons(persons.concat(newPerson)));
+    }
+  };
+
+  // Erase a person
+  const erasePerson = (person) => {
+    if (window.confirm(`Delete ${person.name}?`)) {
+      service
+        .erase(person.id)
+        .then(() => setPersons(persons.filter((x) => x.id !== person.id)));
+    } else {
+      console.log(`it's working`);
     }
   };
 
@@ -66,7 +79,9 @@ const App = () => {
       />
 
       <h2>Numbers</h2>
-      <Persons data={personDisplay} />
+      {personDisplay.map((x) => (
+        <Persons key={x.id} data={x} handle={erasePerson} />
+      ))}
     </div>
   );
 };
