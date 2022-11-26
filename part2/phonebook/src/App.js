@@ -1,24 +1,17 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import PersonForm from "./components/PersonForm";
 import Filter from "./components/Filter";
 import Persons from "./components/Persons";
+import service from "./services/service";
 
 const App = () => {
-  // Hard-coded dummy data
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [newText, setText] = useState("");
 
-  // Fetching data from the server
   useEffect(() => {
-    const eventHandler = (response) => {
-      setPersons(response.data);
-    };
-
-    const promise = axios.get("http://localhost:3001/persons");
-    promise.then(eventHandler);
+    service.getAll().then((initialPersons) => setPersons(initialPersons));
   }, []);
 
   // Person to display if-else
@@ -54,8 +47,7 @@ const App = () => {
         number: newNumber,
         id: persons.length + 1,
       };
-      // Concatenate new entry to persons
-      setPersons(persons.concat(newPerson));
+      service.create(newPerson).then((newPerson) => setPersons(persons.concat(newPerson)))
     }
   };
 
