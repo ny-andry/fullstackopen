@@ -36,11 +36,30 @@ const App = () => {
   // Add a new person
   const addPerson = (event) => {
     event.preventDefault();
-    // Alert if-else
-    if (persons.some((object) => object.name === newName)) {
-      alert(`${newName} is already added to phonebook`);
-      setNewName("");
-      setNewNumber("");
+    // Tests whether at least one element in the array passes the test implemented by the provided function
+    const existAlready = persons.some((object) => object.name === newName);
+    // Message if-else
+    if (existAlready) {
+      const changedNumber = window.confirm(
+        `${newName} is already added to phonebook, replace the old number with a new one?`
+      );
+      if (changedNumber === true) {
+        console.log(`changing the number`);
+        // Constant existing person
+        const existingPerson = persons.find(
+          (object) => object.name === newName
+        );
+        const newPerson = { ...existingPerson, number: newNumber };
+        console.log(`test`, newPerson)
+        service.update(existingPerson.id, newPerson).then((response) => {
+          console.log(`the response`, response);
+          setPersons(persons.map((x) => x.id !== existingPerson.id ? x : response));
+        }
+        );
+      } else {
+        setNewName("");
+        setNewNumber("");
+      }
     } else {
       const newPerson = {
         name: newName,
