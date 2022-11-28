@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import PersonForm from "./components/PersonForm";
 import Filter from "./components/Filter";
 import Persons from "./components/Persons";
+import Notification from "./components/Notification";
 import service from "./services/service";
 
 const App = () => {
@@ -9,6 +10,8 @@ const App = () => {
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [newText, setText] = useState("");
+  const [message, setMessage] = useState(null);
+  const [colour, setColour] = useState(true);
 
   useEffect(() => {
     service.getAll().then((initialPersons) => setPersons(initialPersons));
@@ -44,18 +47,33 @@ const App = () => {
         `${newName} is already added to phonebook, replace the old number with a new one?`
       );
       if (changedNumber === true) {
-        console.log(`changing the number`);
         // Constant existing person
         const existingPerson = persons.find(
           (object) => object.name === newName
         );
         const newPerson = { ...existingPerson, number: newNumber };
-        console.log(`test`, newPerson)
-        service.update(existingPerson.id, newPerson).then((response) => {
-          console.log(`the response`, response);
-          setPersons(persons.map((x) => x.id !== existingPerson.id ? x : response));
-        }
-        );
+        service
+          .update(existingPerson.id, newPerson)
+          .then((response) => {
+            setColour(true);
+            setMessage(`${existingPerson.name}'s number has been changed`);
+            setTimeout(() => {
+              setMessage(null);
+            }, 5000);
+            setPersons(
+              persons.map((x) => (x.id !== existingPerson.id ? x : response))
+            );
+          })
+          .catch(() => {
+            setColour(false);
+            setMessage(`${existingPerson.name} was already removed`);
+            setTimeout(() => {
+              setMessage(null);
+            }, 5000);
+            setPersons(
+              persons.filter((person) => person.id !== existingPerson.id)
+            );
+          });
       } else {
         setNewName("");
         setNewNumber("");
@@ -68,7 +86,14 @@ const App = () => {
       };
       service
         .create(newPerson)
-        .then((newPerson) => setPersons(persons.concat(newPerson)));
+        .then((newPerson) => setPersons(persons.concat(newPerson)))
+        .finally(() => {
+          setColour(true);
+          setMessage(`${newPerson.name} has been added`);
+          setTimeout(() => {
+            setMessage(null);
+          }, 5000);
+        });
     }
   };
 
@@ -89,6 +114,7 @@ const App = () => {
       <Filter handle={handleText} />
 
       <h2>Add a new person</h2>
+      <Notification message={message} bool={colour} />
       <PersonForm
         addPerson={addPerson}
         newName={newName}

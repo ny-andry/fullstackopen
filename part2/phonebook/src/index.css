@@ -1,0 +1,39 @@
+.list {
+  color: darkslategray;
+  padding-top: 3px;
+  font-size: 15px;
+}
+h1 {
+  color: midnightblue;
+  font-family: Arial, Helvetica, sans-serif;
+}
+h2 {
+  color: midnightblue;
+  font-family: Arial, Helvetica, sans-serif;
+}
+h3 {
+  color: midnightblue;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.notifRed {
+  color: black;
+  background-color: darksalmon;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.notifGreen {
+  color: green;
+  background-color: honeydew;
+  font-size: 20px;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
+}
