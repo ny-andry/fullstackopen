@@ -3,8 +3,8 @@
 - [x] Part 0
 - [x] Part 1
 - [x] Part 2
-- [ ] Part 3 (Working 📌)
-- [ ] Part 4
+- [x] Part 3 
+- [ ] Part 4 (Working 📌)
 - [ ] Part 5
 - [ ] Part 6
 - [ ] Part 7
