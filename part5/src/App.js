@@ -82,6 +82,19 @@ const App = () => {
     window.location.reload();
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    blogService.create({
+      title: newTitle,
+      author: newAuthor,
+      url: newUrl,
+    });
+
+    setNewTitle("");
+    setNewAuthor("");
+    setNewUrl("");
+  };
+
   const loginForm = () => (
     <div>
       <h2>Login to application</h2>
@@ -130,6 +143,7 @@ const App = () => {
                   handleTitle={handleTitle}
                   handleAuthor={handleAuthor}
                   handleUrl={handleUrl}
+                  handleSubmit={handleSubmit}
                 />
               </div>
               <h2>blogs</h2>
