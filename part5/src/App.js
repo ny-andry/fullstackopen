@@ -19,6 +19,14 @@ const App = () => {
     fetchBlogs();
   }, []);
 
+  const handleUsername = (event) => {
+    setUsername(event.target.value);
+  };
+
+  const handlePassword = (event) => {
+    setPassword(event.target.value);
+  };
+
   const handleLogin = async (event) => {
     event.preventDefault();
 
@@ -48,7 +56,7 @@ const App = () => {
             type="text"
             value={username}
             name="Username"
-            onChange={({ target }) => setUsername(target.value)}
+            onChange={handleUsername}
           />
         </div>
         <div>
@@ -57,7 +65,7 @@ const App = () => {
             type="password"
             value={password}
             name="Password"
-            onChange={({ target }) => setPassword(target.value)}
+            onChange={handlePassword}
           />
         </div>
         <button type="submit">login</button>
