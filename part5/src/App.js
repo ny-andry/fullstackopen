@@ -83,16 +83,26 @@ const App = () => {
   };
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    blogService.create({
-      title: newTitle,
-      author: newAuthor,
-      url: newUrl,
-    });
-
-    setNewTitle("");
-    setNewAuthor("");
-    setNewUrl("");
+    try {
+      event.preventDefault();
+      blogService.create({
+        title: newTitle,
+        author: newAuthor,
+        url: newUrl,
+      });
+      setErrorMessage(`${newTitle} by ${newAuthor} added`);
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 5000);
+      setNewTitle("");
+      setNewAuthor("");
+      setNewUrl("");
+    } catch (error) {
+      setErrorMessage(`${error.response.data.error}`);
+      setTimeout(() => {
+        setErrorMessage(null);
+      }, 5000);
+    }
   };
 
   const loginForm = () => (
