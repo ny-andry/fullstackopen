@@ -3,10 +3,17 @@ import Blog from "./components/Blog";
 import blogService from "./services/blogs";
 import loginService from "./services/login";
 import Notification from "./components/Notification";
+import BlogForm from "./components/BlogForm";
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
+
+  const [newTitle, setNewTitle] = useState("");
+  const [newAuthor, setNewAuthor] = useState("");
+  const [newUrl, setNewUrl] = useState("");
+
   const [errorMessage, setErrorMessage] = useState(null);
+
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [user, setUser] = useState(null);
@@ -34,6 +41,18 @@ const App = () => {
 
   const handlePassword = (event) => {
     setPassword(event.target.value);
+  };
+
+  const handleTitle = (event) => {
+    setNewTitle(event.target.value);
+  };
+
+  const handleAuthor = (event) => {
+    setNewAuthor(event.target.value);
+  };
+
+  const handleUrl = (event) => {
+    setNewUrl(event.target.value);
   };
 
   const handleLogin = async (event) => {
@@ -103,6 +122,16 @@ const App = () => {
               <button onClick={handleLogout}>Log Out</button>
             </div>
             <div>
+              <div>
+                <BlogForm
+                  title={newTitle}
+                  author={newAuthor}
+                  url={newUrl}
+                  handleTitle={handleTitle}
+                  handleAuthor={handleAuthor}
+                  handleUrl={handleUrl}
+                />
+              </div>
               <h2>blogs</h2>
               {blogs.map((blog) => (
                 <Blog key={blog.id} blog={blog} />

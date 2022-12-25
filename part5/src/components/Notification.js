@@ -7,7 +7,7 @@ const Notification = ({ message }) => {
     <div
       style={{
         color: "white",
-        backgroundColor: "red",
+        backgroundColor: "black",
         fontSize: "20px",
         fontWeight: "bold",
         padding: "10px",
