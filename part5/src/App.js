@@ -60,6 +60,7 @@ const App = () => {
   const handleLogout = () => {
     window.localStorage.removeItem("blogapp");
     setUser(undefined);
+    window.location.reload();
   };
 
   const loginForm = () => (
