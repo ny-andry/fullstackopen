@@ -65,7 +65,13 @@ const App = () => {
     <div>
       <div>
         <Notification message={errorMessage} />
-        {user === null && loginForm()}
+        {user === null ? (
+          loginForm()
+        ) : (
+          <div>
+            <p>{user.name} logged-in</p>
+          </div>
+        )}
       </div>
 
       <h2>blogs</h2>
