@@ -57,6 +57,11 @@ const App = () => {
     }
   };
 
+  const handleLogout = () => {
+    window.localStorage.removeItem("blogapp");
+    setUser(undefined);
+  };
+
   const loginForm = () => (
     <div>
       <h2>Login to application</h2>
@@ -93,7 +98,8 @@ const App = () => {
         ) : (
           <>
             <div>
-              <p>{user.name} logged-in</p>
+              <p>{user.name} logged-in </p>
+              <button onClick={handleLogout}>Log Out</button>
             </div>
             <div>
               <h2>blogs</h2>
