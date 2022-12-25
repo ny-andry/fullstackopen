@@ -12,7 +12,11 @@ const App = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
-    blogService.getAll().then((blogs) => setBlogs(blogs));
+    const fetchBlogs = async () => {
+      const blogs = await blogService.getAll();
+      setBlogs(blogs);
+    };
+    fetchBlogs();
   }, []);
 
   const handleLogin = async (event) => {
@@ -68,16 +72,19 @@ const App = () => {
         {user === null ? (
           loginForm()
         ) : (
-          <div>
-            <p>{user.name} logged-in</p>
-          </div>
+          <>
+            <div>
+              <p>{user.name} logged-in</p>
+            </div>
+            <div>
+              <h2>blogs</h2>
+              {blogs.map((blog) => (
+                <Blog key={blog.id} blog={blog} />
+              ))}
+            </div>
+          </>
         )}
       </div>
-
-      <h2>blogs</h2>
-      {blogs.map((blog) => (
-        <Blog key={blog.id} blog={blog} />
-      ))}
     </div>
   );
 };
