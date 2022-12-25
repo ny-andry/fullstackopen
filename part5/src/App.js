@@ -19,6 +19,15 @@ const App = () => {
     fetchBlogs();
   }, []);
 
+  useEffect(() => {
+    const loggedUserJSON = window.localStorage.getItem("blogapp");
+    if (loggedUserJSON) {
+      const user = JSON.parse(loggedUserJSON);
+      setUser(user);
+      blogService.setToken(user.token);
+    }
+  }, []);
+
   const handleUsername = (event) => {
     setUsername(event.target.value);
   };
@@ -36,6 +45,8 @@ const App = () => {
         password,
       });
       setUser(user);
+      window.localStorage.setItem("blogapp", JSON.stringify(user));
+      blogService.setToken(user.token);
       setUsername("");
       setPassword("");
     } catch (exception) {

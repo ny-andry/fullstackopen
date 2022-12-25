@@ -5,7 +5,6 @@ const Notification = ({ message }) => {
 
   return (
     <div
-      className="error"
       style={{
         color: "white",
         backgroundColor: "red",
