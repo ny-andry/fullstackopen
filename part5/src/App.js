@@ -19,7 +19,6 @@ const App = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       const blogs = await blogService.getAll();
-      blogs.sort((a, b) => a.likes - b.likes);
       setBlogs(blogs);
     };
     fetchBlogs();
@@ -50,9 +49,9 @@ const App = () => {
         username,
         password,
       });
-      setUser(user);
       window.localStorage.setItem("blogapp", JSON.stringify(user));
       blogService.setToken(user.token);
+      setUser(user);
       setUsername("");
       setPassword("");
     } catch (exception) {
@@ -76,6 +75,7 @@ const App = () => {
       setTimeout(() => {
         setErrorMessage(null);
       }, 5000);
+      setBlogs([...blogs, blog]);
     } catch (error) {
       setErrorMessage(`${error.response.data.error}`);
       setTimeout(() => {
@@ -86,6 +86,7 @@ const App = () => {
 
   const updateBlog = (blog, id) => {
     blogService.update(blog, id);
+    setBlogs(blogs.map((b) => (b.id !== id ? b : blog)));
   };
 
   return (
