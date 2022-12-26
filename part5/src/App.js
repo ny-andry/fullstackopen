@@ -5,6 +5,7 @@ import loginService from "./services/login";
 import Notification from "./components/Notification";
 import BlogForm from "./components/BlogForm";
 import LoginForm from "./components/LoginForm";
+import Togglable from "./components/Togglable";
 
 const App = () => {
   const [blogs, setBlogs] = useState([]);
@@ -126,15 +127,17 @@ const App = () => {
             </div>
             <div>
               <div>
-                <BlogForm
-                  title={newTitle}
-                  author={newAuthor}
-                  url={newUrl}
-                  handleTitle={handleTitle}
-                  handleAuthor={handleAuthor}
-                  handleUrl={handleUrl}
-                  handleSubmit={handleSubmit}
-                />
+                <Togglable buttonLabel="new blog" >
+                  <BlogForm
+                    title={newTitle}
+                    author={newAuthor}
+                    url={newUrl}
+                    handleTitle={handleTitle}
+                    handleAuthor={handleAuthor}
+                    handleUrl={handleUrl}
+                    handleSubmit={handleSubmit}
+                  />
+                </Togglable>
               </div>
               <h2>blogs</h2>
               {blogs.map((blog) => (
