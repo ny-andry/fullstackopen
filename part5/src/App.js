@@ -10,10 +10,6 @@ import Togglable from "./components/Togglable";
 const App = () => {
   const [blogs, setBlogs] = useState([]);
 
-  const [newTitle, setNewTitle] = useState("");
-  const [newAuthor, setNewAuthor] = useState("");
-  const [newUrl, setNewUrl] = useState("");
-
   const [errorMessage, setErrorMessage] = useState(null);
 
   const [username, setUsername] = useState("");
@@ -45,18 +41,6 @@ const App = () => {
     setPassword(event.target.value);
   };
 
-  const handleTitle = (event) => {
-    setNewTitle(event.target.value);
-  };
-
-  const handleAuthor = (event) => {
-    setNewAuthor(event.target.value);
-  };
-
-  const handleUrl = (event) => {
-    setNewUrl(event.target.value);
-  };
-
   const handleLogin = async (event) => {
     event.preventDefault();
 
@@ -84,21 +68,13 @@ const App = () => {
     window.location.reload();
   };
 
-  const handleSubmit = (event) => {
+  const createBlog = (blog) => {
     try {
-      event.preventDefault();
-      blogService.create({
-        title: newTitle,
-        author: newAuthor,
-        url: newUrl,
-      });
-      setErrorMessage(`${newTitle} by ${newAuthor} added`);
+      blogService.create(blog);
+      setErrorMessage(`${blog.title} by ${blog.author} added`);
       setTimeout(() => {
         setErrorMessage(null);
       }, 5000);
-      setNewTitle("");
-      setNewAuthor("");
-      setNewUrl("");
     } catch (error) {
       setErrorMessage(`${error.response.data.error}`);
       setTimeout(() => {
@@ -128,15 +104,7 @@ const App = () => {
             <div>
               <div>
                 <Togglable buttonLabel="new blog">
-                  <BlogForm
-                    title={newTitle}
-                    author={newAuthor}
-                    url={newUrl}
-                    handleTitle={handleTitle}
-                    handleAuthor={handleAuthor}
-                    handleUrl={handleUrl}
-                    handleSubmit={handleSubmit}
-                  />
+                  <BlogForm createBlog={createBlog} />
                 </Togglable>
               </div>
               <h2>blogs</h2>
