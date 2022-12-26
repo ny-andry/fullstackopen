@@ -86,7 +86,7 @@ const App = () => {
 
   const updateBlog = (blog, id) => {
     blogService.update(blog, id);
-    setBlogs(blogs.map((b) => (b.id !== id ? b : blog)));
+    // needs to add setblogs that rerenders it proprely.
   };
 
   return (
@@ -115,7 +115,7 @@ const App = () => {
               </div>
               <h2>blogs</h2>
               {blogs.map((blog) => (
-                <Blog key={blog.id} blog={blog} updateBlog={updateBlog} />
+                <Blog key={blog.title} blog={blog} updateBlog={updateBlog} />
               ))}
             </div>
           </>
