@@ -83,6 +83,10 @@ const App = () => {
     }
   };
 
+  const updateBlog = (blog, id) => {
+    blogService.update(blog, id);
+  };
+
   return (
     <div>
       <div>
@@ -109,7 +113,7 @@ const App = () => {
               </div>
               <h2>blogs</h2>
               {blogs.map((blog) => (
-                <Blog key={blog.id} blog={blog} />
+                <Blog key={blog.id} blog={blog} updateBlog={updateBlog} />
               ))}
             </div>
           </>
