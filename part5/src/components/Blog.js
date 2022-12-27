@@ -13,8 +13,8 @@ const elementStyles = {
   color: "grey",
 };
 
-const Blog = ({ blog, updateBlog }) => {
-  const handleClick = () => {
+const Blog = ({ blog, updateBlog, removeBlog }) => {
+  const handleUpdate = () => {
     const blogObj = {
       title: blog.title,
       author: blog.author,
@@ -23,15 +23,23 @@ const Blog = ({ blog, updateBlog }) => {
     };
     updateBlog(blogObj, blog.id);
   };
+
+  const handleRemove = () => {
+    removeBlog(blog.id);
+  };
+
   return (
     <div style={containerStyles}>
       <h3 style={titleStyles}>{blog.title}</h3>
       <Togglable buttonLabel="view">
         <p style={elementStyles}>{blog.url}</p>
         <p style={elementStyles}>
-          likes: {blog.likes} <button onClick={handleClick}> like </button>
+          likes: {blog.likes} <button onClick={handleUpdate}> like </button>
         </p>
         <p style={elementStyles}>{blog.author}</p>
+        <p>
+          <button onClick={handleRemove}>remove</button>
+        </p>
       </Togglable>
     </div>
   );

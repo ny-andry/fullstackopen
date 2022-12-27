@@ -90,6 +90,10 @@ const App = () => {
     // needs to add setblogs that rerenders it proprely.
   };
 
+  const removeBlog = (id) => {
+    blogService.remove(id);
+  };
+
   return (
     <div>
       <div>
@@ -116,7 +120,12 @@ const App = () => {
               </div>
               <h2>blogs</h2>
               {blogs.map((blog) => (
-                <Blog key={blog.title} blog={blog} updateBlog={updateBlog} />
+                <Blog
+                  key={blog.title}
+                  blog={blog}
+                  updateBlog={updateBlog}
+                  removeBlog={removeBlog}
+                />
               ))}
             </div>
           </>
