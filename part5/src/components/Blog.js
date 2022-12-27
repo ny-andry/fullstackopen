@@ -13,7 +13,7 @@ const elementStyles = {
   color: "grey",
 };
 
-const Blog = ({ blog, updateBlog, removeBlog }) => {
+const Blog = ({ blog, updateBlog, removeBlog, user }) => {
   const handleUpdate = () => {
     const blogObj = {
       title: blog.title,
@@ -41,7 +41,9 @@ const Blog = ({ blog, updateBlog, removeBlog }) => {
         </p>
         <p style={elementStyles}>{blog.author}</p>
         <p>
-          <button onClick={handleRemove}>remove</button>
+          {user.username === blog.user.username && (
+            <button onClick={handleRemove}>remove</button>
+          )}
         </p>
       </Togglable>
     </div>
