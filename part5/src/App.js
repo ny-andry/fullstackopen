@@ -92,6 +92,7 @@ const App = () => {
 
   const removeBlog = (id) => {
     blogService.remove(id);
+    setBlogs(blogs.filter((blog) => blog.id !== id));
   };
 
   return (
