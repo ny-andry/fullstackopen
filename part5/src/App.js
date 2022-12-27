@@ -76,7 +76,7 @@ const App = () => {
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
-      setBlogs([...blogs, blog])
+      // setBlogs([...blogs, blog])
     } catch (error) {
       setErrorMessage(`${error.response.data.error}`)
       setTimeout(() => {

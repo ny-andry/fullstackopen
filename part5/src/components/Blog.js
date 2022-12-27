@@ -41,9 +41,9 @@ const Blog = ({ blog, updateBlog, removeBlog, user }) => {
         </p>
         <p style={elementStyles}>{blog.author}</p>
         <p>
-          {user.username === blog.user.username && (
+          {user && user.username === blog.user.username ? (
             <button onClick={handleRemove}>remove</button>
-          )}
+          ) : null}
         </p>
       </Togglable>
     </div>
