@@ -23,17 +23,15 @@ const App = () => {
       blogs.sort((a, b) => b.likes - a.likes)
       setBlogs(blogs)
     }
-    fetchBlogs()
-  }, [])
 
-  useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('blogapp')
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
-      console.log(user)
       blogService.setToken(user.token)
     }
+
+    fetchBlogs()
   }, [])
 
   const handleUsername = (event) => {
@@ -67,8 +65,13 @@ const App = () => {
 
   const handleLogout = () => {
     window.localStorage.removeItem('blogapp')
+
     setUser(undefined)
     window.location.reload()
+    setMessage('Logged out')
+    setTimeout(() => {
+      setMessage(null)
+    }, 5000)
   }
 
   const createBlog = (blog) => {
