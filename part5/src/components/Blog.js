@@ -28,12 +28,14 @@ const Blog = ({ blog, updateBlog, removeBlog, user }) => {
 
   return (
     <div style={containerStyles}>
-      <h3 style={titleStyles}>
+      <h3 style={titleStyles} className="title">
         {blog.title} by {blog.author}
       </h3>
       <Togglable buttonLabel="view">
-        <p style={elementStyles}>{blog.url}</p>
-        <p style={elementStyles}>
+        <p style={elementStyles} className="url">
+          {blog.url}
+        </p>
+        <p style={elementStyles} className="likes">
           likes: {blog.likes} <button onClick={handleUpdate}> like </button>
         </p>
         <p>added by: {blog.user.name}</p>

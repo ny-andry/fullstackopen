@@ -11,7 +11,7 @@ import './index.css'
 const App = () => {
   const [blogs, setBlogs] = useState([])
 
-  const [errorMessage, setErrorMessage] = useState(null)
+  const [message, setMessage] = useState(null)
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -57,9 +57,9 @@ const App = () => {
       setUsername('')
       setPassword('')
     } catch (exception) {
-      setErrorMessage('Wrong credentials')
+      setMessage('Wrong credentials')
       setTimeout(() => {
-        setErrorMessage(null)
+        setMessage(null)
       }, 5000)
     }
   }
@@ -73,15 +73,15 @@ const App = () => {
   const createBlog = (blog) => {
     try {
       blogService.create(blog)
-      setErrorMessage(`${blog.title} by ${blog.author} added`)
+      setMessage(`${blog.title} by ${blog.author} added`)
+      setBlogs(blogs.concat(blog)) // add the new blog to the list of blogs
       setTimeout(() => {
-        setErrorMessage(null)
+        setMessage(null)
       }, 5000)
-      setBlogs([...blogs, blog])
     } catch (error) {
-      setErrorMessage(`${error.response.data.error}`)
+      setMessage(`${error.response.data.error}`)
       setTimeout(() => {
-        setErrorMessage(null)
+        setMessage(null)
       }, 5000)
     }
   }
@@ -101,7 +101,7 @@ const App = () => {
   return (
     <div>
       <div>
-        <Notification message={errorMessage} />
+        <Notification message={message} />
         {user === null ? (
           <LoginForm
             handleLogin={handleLogin}
