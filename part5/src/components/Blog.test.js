@@ -59,8 +59,19 @@ describe('<Blog /> test', () => {
     await user.click(button)
 
     const elementUrl = container.querySelector('.url')
-    expect(elementUrl).toBeVisible()
     const elementLikes = container.querySelector('.likes')
+
+    expect(elementUrl).toBeVisible()
     expect(elementLikes).toBeVisible()
+  })
+
+  test('ensures that if the like button is clicked twice, the event handler is called twice', async () => {
+    const user = userEvent.setup()
+
+    const button = screen.getByText('like')
+    await user.click(button)
+    await user.click(button)
+
+    expect(updateBlog.mock.calls).toHaveLength(2)
   })
 })
