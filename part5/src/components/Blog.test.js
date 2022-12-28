@@ -42,4 +42,12 @@ describe('<Blog /> test', () => {
       'Test Blog by Test Author'
     )
   })
+
+  test('not shown url and likes', () => {
+    const elementUrl = container.querySelector('.url')
+    const elementLikes = container.querySelector('.likes')
+
+    expect(elementUrl).not.toBeVisible()
+    expect(elementLikes).not.toBeVisible()
+  })
 })
