@@ -14,7 +14,8 @@ describe('<Blog /> test', () => {
     updateBlog = jest.fn()
     removeBlog = jest.fn()
     user = {
-      username: 'test_user'
+      username: 'test_user',
+      name: 'test_name'
     }
     blog = {
       title: 'Test Blog',
@@ -22,7 +23,8 @@ describe('<Blog /> test', () => {
       url: 'http://test.com',
       likes: 5,
       user: {
-        username: 'test_user'
+        username: 'test_user',
+        name: 'test_name'
       }
     }
     container = render(
@@ -39,10 +41,5 @@ describe('<Blog /> test', () => {
     expect(container.querySelector('.title').textContent).toContain(
       'Test Blog by Test Author'
     )
-  })
-
-  test('does not render the url or number of likes by default', () => {
-    expect(container.querySelector('.url')).toBeNull()
-    expect(container.querySelector('.likes')).toBeNull()
   })
 })
