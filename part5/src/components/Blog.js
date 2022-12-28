@@ -15,12 +15,7 @@ const elementStyles = {
 
 const Blog = ({ blog, updateBlog, removeBlog, user }) => {
   const handleUpdate = () => {
-    const blogObj = {
-      title: blog.title,
-      author: blog.author,
-      url: blog.url,
-      likes: blog.likes + 1
-    }
+    const blogObj = { ...blog, likes: blog.likes + 1 }
     updateBlog(blogObj, blog.id)
   }
 
@@ -41,6 +36,7 @@ const Blog = ({ blog, updateBlog, removeBlog, user }) => {
         <p style={elementStyles}>
           likes: {blog.likes} <button onClick={handleUpdate}> like </button>
         </p>
+        <p>added by: {blog.user.name}</p>
         <p>
           {user && user.username === blog.user.username ? (
             <button onClick={handleRemove}>remove</button>

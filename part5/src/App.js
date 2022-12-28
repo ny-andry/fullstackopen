@@ -77,7 +77,7 @@ const App = () => {
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
-      // setBlogs([...blogs, blog])
+      setBlogs([...blogs, blog])
     } catch (error) {
       setErrorMessage(`${error.response.data.error}`)
       setTimeout(() => {
@@ -89,6 +89,8 @@ const App = () => {
   const updateBlog = (blog, id) => {
     blogService.update(blog, id)
     // needs to add setblogs that rerenders it proprely.
+    const updatedBlogs = blogs.map((x) => (x.id !== id ? x : blog))
+    setBlogs(updatedBlogs)
   }
 
   const removeBlog = (id) => {
