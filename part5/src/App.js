@@ -31,6 +31,7 @@ const App = () => {
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
+      console.log(user)
       blogService.setToken(user.token)
     }
   }, [])
@@ -90,7 +91,7 @@ const App = () => {
     blogService.update(blog, id)
     // needs to add setblogs that rerenders it proprely.
     const updatedBlogs = blogs.map((x) => (x.id !== id ? x : blog))
-    setBlogs(updatedBlogs)
+    setBlogs(updatedBlogs.sort((a, b) => b.likes - a.likes))
   }
 
   const removeBlog = (id) => {
