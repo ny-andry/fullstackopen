@@ -1,25 +1,31 @@
-import BlogForm from './BlogForm'
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import userEvent from '@testing-library/user-event'
+import BlogForm from './BlogForm'
 
-describe('<BlogForm /> test', () => {
+test('<BlogForm /> test', async () => {
   const mockfn = jest.fn()
+  const user = userEvent.setup()
 
-  const container = render(<BlogForm createBlog={mockfn} />).container
-  test('the form calls the event handler it received as props with the right details', () => {
-    const inputTitle = container.querySelector('#title-id')
-    const inputAuthor = container.querySelector('#author-id')
-    const inputUrl = container.querySelector('#url-id')
+  const newBlog = {
+    title: 'Title blog',
+    author: 'Author',
+    url: 'mysite.com'
+  }
 
-    const button = screen.getByText('create')
+  render(<BlogForm createBlog={mockfn} />)
 
-    userEvent.type(inputTitle, 'Titre')
-    userEvent.type(inputAuthor, 'Auteur')
-    userEvent.type(inputUrl, 'Lien')
-    userEvent.click(button)
+  const titleInput = document.querySelector('#title-id')
+  const authorInput = document.querySelector('#author-id')
+  const urlInput = document.querySelector('#url-id')
+  const submitButton = screen.getByText('create')
 
-    expect(mockfn.mock.calls).toHaveLength(1)
-  })
+  await user.type(titleInput, newBlog.title)
+  await user.type(authorInput, newBlog.author)
+  await user.type(urlInput, newBlog.url)
+  await user.click(submitButton)
+
+  expect(mockfn.mock.calls).toHaveLength(1)
+  expect(mockfn.mock.calls[0][0]).toEqual(newBlog)
 })
