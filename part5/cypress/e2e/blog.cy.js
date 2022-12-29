@@ -55,5 +55,31 @@ describe('Blog app', function () {
       cy.contains('Titre du blog')
       cy.contains('Auteur du blog')
     })
+
+    it('Users can like a blog', () => {
+      cy.contains('new blog').click()
+      cy.get('#title-id').type('Titre du blog')
+      cy.get('#author-id').type('Auteur du blog')
+      cy.get('#url-id').type('sitedublog.com')
+      cy.get('#create-id').click()
+
+      cy.contains('view').click()
+      cy.get('#like').click()
+
+      cy.contains('likes: 1')
+    })
+
+    it('Authorized user can delete a blog', () => {
+      cy.contains('new blog').click()
+      cy.get('#title-id').type('Titre du blog')
+      cy.get('#author-id').type('Auteur du blog')
+      cy.get('#url-id').type('sitedublog.com')
+      cy.get('#create-id').click()
+
+      cy.contains('view').click()
+
+      cy.get('#remove').click()
+      cy.contains('Titre du blog').should('not.exist')
+    })
   })
 })

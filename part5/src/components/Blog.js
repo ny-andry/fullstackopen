@@ -36,11 +36,17 @@ const Blog = ({ blog, updateBlog, removeBlog, user }) => {
           {blog.url}
         </p>
         <p style={elementStyles} className="likes">
-          likes: {blog.likes} <button onClick={handleUpdate}> like </button>
+          likes: {blog.likes}{' '}
+          <button id="like" onClick={handleUpdate}>
+            like
+          </button>
         </p>
+        <p>created by {blog.user.username}</p>
         <p>
-          {user && user.username === blog.user.username ? (
-            <button onClick={handleRemove}>remove</button>
+          {user.username === blog.user.username ? (
+            <button id="remove" onClick={handleRemove}>
+              remove
+            </button>
           ) : null}
         </p>
       </Togglable>
