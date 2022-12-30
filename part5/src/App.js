@@ -1,12 +1,17 @@
 import { useState, useEffect } from 'react'
+
 import Blog from './components/Blog'
-import blogService from './services/blogs'
-import loginService from './services/login'
 import Notification from './components/Notification'
 import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
 import Togglable from './components/Togglable'
+
+import loginService from './services/login'
+import blogService from './services/blogs'
+
 import './index.css'
+
+const byLikes = (a, b) => b.likes - a.likes
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -20,7 +25,7 @@ const App = () => {
   useEffect(() => {
     const fetchBlogs = async () => {
       const blogs = await blogService.getAll()
-      blogs.sort((a, b) => b.likes - a.likes)
+      blogs.sort(byLikes)
       setBlogs(blogs)
     }
 
@@ -92,7 +97,7 @@ const App = () => {
   const updateBlog = async (blog, id) => {
     const newBlog = await blogService.update(blog, id)
     const updatedBlogs = [...blogs].map((x) => (x.id !== id ? x : newBlog))
-    setBlogs(updatedBlogs.sort((a, b) => b.likes - a.likes))
+    setBlogs(updatedBlogs.sort(byLikes))
   }
 
   const removeBlog = async (id) => {
@@ -104,7 +109,7 @@ const App = () => {
     <div>
       <div>
         <Notification message={message} />
-        {!user? (
+        {!user ? (
           <LoginForm
             handleLogin={handleLogin}
             handlePassword={handlePassword}
