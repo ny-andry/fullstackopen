@@ -52,9 +52,8 @@ const App = () => {
   }
 
   const handleLogout = () => {
-    window.localStorage.removeItem('blogapp')
-
     setUser()
+    userService.clearUser()
     setMessage('Logged out')
     setTimeout(() => {
       setMessage(null)
@@ -83,9 +82,24 @@ const App = () => {
     setBlogs(updatedBlogs.sort(byLikes))
   }
 
+  // const removeBlog = async (id) => {
+  //   await blogService.remove(id)
+  //   setBlogs([...blogs].filter((blog) => blog.id !== id))
+  // }
+
   const removeBlog = async (id) => {
+    const toRemove = blogs.find((b) => b.id === id)
+
+    const ok = window.confirm(
+      `remove '${toRemove.title}' by ${toRemove.author}?`
+    )
+
+    if (!ok) {
+      return
+    }
     await blogService.remove(id)
-    setBlogs([...blogs].filter((blog) => blog.id !== id))
+    const updatedBlogs = blogs.filter((b) => b.id !== id).sort(byLikes)
+    setBlogs(updatedBlogs)
   }
 
   return (

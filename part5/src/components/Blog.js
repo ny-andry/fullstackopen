@@ -19,13 +19,6 @@ const Blog = ({ blog, updateBlog, removeBlog, user }) => {
     updateBlog(blogObj, blog.id)
   }
 
-  const handleRemove = () => {
-    const confirm = window.confirm(`Remove ${blog.title} by ${blog.author}?`)
-    if (confirm) {
-      removeBlog(blog.id)
-    }
-  }
-
   return (
     <div style={containerStyles} className="blog">
       <h3 style={titleStyles} className="title">
@@ -44,7 +37,7 @@ const Blog = ({ blog, updateBlog, removeBlog, user }) => {
         <p>
           {blog.user.name}
           {user.username === blog.user.username && (
-            <button id="remove" onClick={handleRemove}>
+            <button id="remove" onClick={() => removeBlog(blog.id)}>
               remove
             </button>
           )}
