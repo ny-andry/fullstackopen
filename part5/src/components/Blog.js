@@ -27,7 +27,7 @@ const Blog = ({ blog, updateBlog, removeBlog, user }) => {
   }
 
   return (
-    <div style={containerStyles}>
+    <div style={containerStyles} className="blog">
       <h3 style={titleStyles} className="title">
         {blog.title} by {blog.author}
       </h3>

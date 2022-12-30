@@ -56,7 +56,7 @@ describe('Blog app', function () {
       cy.contains('Auteur du blog')
     })
 
-    it('Users can like a blog', () => {
+    it('Users can like a blog', function () {
       cy.contains('new blog').click()
       cy.get('#title-id').type('Titre du blog')
       cy.get('#author-id').type('Auteur du blog')
@@ -80,6 +80,31 @@ describe('Blog app', function () {
 
       cy.get('#remove').click()
       cy.contains('Titre du blog').should('not.exist')
+    })
+
+    it('When there are more blogs', function () {
+      cy.createBlog({
+        title: 'first blog',
+        author: 'first blogger',
+        url: 'firstblog.com',
+        likes: 666
+      })
+      cy.createBlog({
+        title: 'second blog',
+        author: 'second blogger',
+        url: 'secondblog.com',
+        likes: 69
+      })
+      cy.createBlog({
+        title: 'third blog',
+        author: 'third blogger',
+        url: 'thirdblog.com',
+        likes: 7
+      })
+
+      cy.get('.blog').eq(0).should('contain', 'first blog')
+      cy.get('.blog').eq(1).should('contain', 'second blog')
+      cy.get('.blog').eq(2).should('contain', 'third blog')
     })
   })
 })
