@@ -15,7 +15,7 @@ const App = () => {
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState()
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -66,8 +66,7 @@ const App = () => {
   const handleLogout = () => {
     window.localStorage.removeItem('blogapp')
 
-    setUser(undefined)
-    window.location.reload()
+    setUser()
     setMessage('Logged out')
     setTimeout(() => {
       setMessage(null)
@@ -106,7 +105,7 @@ const App = () => {
     <div>
       <div>
         <Notification message={message} />
-        {user === null ? (
+        {!user? (
           <LoginForm
             handleLogin={handleLogin}
             handlePassword={handlePassword}

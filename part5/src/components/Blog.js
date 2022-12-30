@@ -41,13 +41,12 @@ const Blog = ({ blog, updateBlog, removeBlog, user }) => {
             like
           </button>
         </p>
-        <p>created by {blog.user.username}</p>
         <p>
-          {user && user.username === blog.user.username ? (
+          {user.username === blog.user.username && (
             <button id="remove" onClick={handleRemove}>
               remove
             </button>
-          ) : null}
+          )}
         </p>
       </Togglable>
     </div>
