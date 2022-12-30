@@ -77,8 +77,8 @@ const App = () => {
   const createBlog = async (blog) => {
     try {
       const newBlog = await blogService.create(blog)
+      setBlogs([...blogs, newBlog])
       setMessage(`${blog.title} by ${blog.author} added`)
-      setBlogs(blogs.concat(newBlog))
       setTimeout(() => {
         setMessage(null)
       }, 5000)
@@ -92,13 +92,14 @@ const App = () => {
 
   const updateBlog = async (blog, id) => {
     const newBlog = await blogService.update(blog, id)
-    const updatedBlogs = blogs.map((x) => (x.id !== id ? x : newBlog))
+    const updatedBlogs = [...blogs].map((x) => (x.id !== id ? x : newBlog))
     setBlogs(updatedBlogs.sort((a, b) => b.likes - a.likes))
+    console.log(blogs)
   }
 
   const removeBlog = async (id) => {
     await blogService.remove(id)
-    setBlogs(blogs.filter((blog) => blog.id !== id))
+    setBlogs([...blogs].filter((blog) => blog.id !== id))
   }
 
   return (

@@ -43,7 +43,7 @@ const Blog = ({ blog, updateBlog, removeBlog, user }) => {
         </p>
         <p>created by {blog.user.username}</p>
         <p>
-          {user.username === blog.user.username ? (
+          {user && user.username === blog.user.username ? (
             <button id="remove" onClick={handleRemove}>
               remove
             </button>
