@@ -36,12 +36,13 @@ const Blog = ({ blog, updateBlog, removeBlog, user }) => {
           {blog.url}
         </p>
         <p style={elementStyles} className="likes">
-          likes: {blog.likes}{' '}
+          likes: {blog.likes}
           <button id="like" onClick={handleUpdate}>
             like
           </button>
         </p>
         <p>
+          {blog.user.name}
           {user.username === blog.user.username && (
             <button id="remove" onClick={handleRemove}>
               remove
