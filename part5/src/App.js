@@ -8,6 +8,7 @@ import Togglable from './components/Togglable'
 
 import loginService from './services/login'
 import blogService from './services/blogs'
+import userService from './services/user'
 
 import './index.css'
 
@@ -15,12 +16,11 @@ const byLikes = (a, b) => b.likes - a.likes
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
-
+  const [user, setUser] = useState()
   const [message, setMessage] = useState(null)
 
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-  const [user, setUser] = useState()
 
   useEffect(() => {
     const fetchBlogs = async () => {
@@ -28,15 +28,14 @@ const App = () => {
       blogs.sort(byLikes)
       setBlogs(blogs)
     }
-
-    const loggedUserJSON = window.localStorage.getItem('blogapp')
-    if (loggedUserJSON) {
-      const user = JSON.parse(loggedUserJSON)
-      setUser(user)
-      blogService.setToken(user.token)
-    }
-
     fetchBlogs()
+  }, [])
+
+  useEffect(() => {
+    const userFromStorage = userService.getUser()
+    if (userFromStorage) {
+      setUser(userFromStorage)
+    }
   }, [])
 
   const handleUsername = (event) => {
