@@ -19,9 +19,6 @@ const App = () => {
   const [user, setUser] = useState()
   const [message, setMessage] = useState(null)
 
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-
   useEffect(() => {
     const fetchBlogs = async () => {
       const blogs = await blogService.getAll()
@@ -38,27 +35,14 @@ const App = () => {
     }
   }, [])
 
-  const handleUsername = (event) => {
-    setUsername(event.target.value)
-  }
-
-  const handlePassword = (event) => {
-    setPassword(event.target.value)
-  }
-
-  const handleLogin = async (event) => {
-    event.preventDefault()
-
+  const login = async (username, password) => {
     try {
       const user = await loginService.login({
         username,
         password
       })
-      window.localStorage.setItem('blogapp', JSON.stringify(user))
-      blogService.setToken(user.token)
       setUser(user)
-      setUsername('')
-      setPassword('')
+      userService.setUser(user)
     } catch (exception) {
       setMessage('Wrong credentials')
       setTimeout(() => {
@@ -109,13 +93,7 @@ const App = () => {
       <div>
         <Notification message={message} />
         {!user ? (
-          <LoginForm
-            handleLogin={handleLogin}
-            handlePassword={handlePassword}
-            handleUsername={handleUsername}
-            username={username}
-            password={password}
-          />
+          <LoginForm onLogin={login} />
         ) : (
           <>
             <div>
