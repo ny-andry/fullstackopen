@@ -1,5 +1,7 @@
 # FullStackOpen 2022 🌱
 
+[Certificate](https://https://studies.cs.helsinki.fi/stats/api/certificate/fullstackopen/en/d9825e89e9805a1155b27e16532a4d85)
+
 - [x] Part 0
 - [x] Part 1
 - [x] Part 2
