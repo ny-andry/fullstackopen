@@ -12,6 +12,7 @@ part2/countries/.env
 
 part5/node_modules
 
-part6/
+part6/counter/node_modules
+vite-app
 
 part7/
