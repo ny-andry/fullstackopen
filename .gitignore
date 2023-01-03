@@ -13,6 +13,7 @@ part2/countries/.env
 part5/node_modules
 
 part6/counter/node_modules
-vite-app
+part6/vite-project
+part6/unicafe-redux/node_modules
 
 part7/
