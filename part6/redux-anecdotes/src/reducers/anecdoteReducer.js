@@ -43,7 +43,7 @@ export const vote = (id) => {
   };
 };
 
-export const createnote = (anecdote) => {
+export const createanecdote = (anecdote) => {
   return {
     type: "NEW",
     data: asObject(anecdote),
