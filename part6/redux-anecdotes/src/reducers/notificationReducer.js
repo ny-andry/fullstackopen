@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState =  '' ;
+const initialState = "";
 
 const notificationSlice = createSlice({
   name: "notification",
@@ -12,7 +12,7 @@ const notificationSlice = createSlice({
       return state;
     },
     clearNotification: (state) => {
-      state = '';
+      state = "";
       return state;
     },
   },
