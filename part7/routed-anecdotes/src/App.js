@@ -1,18 +1,8 @@
 import { useState } from "react";
 import About from "./component/About";
 import Menu from "./component/Menu";
-import Footer from "./Footer";
-
-const AnecdoteList = ({ anecdotes }) => (
-  <div>
-    <h2>Anecdotes</h2>
-    <ul>
-      {anecdotes.map((anecdote) => (
-        <li key={anecdote.id}>{anecdote.content}</li>
-      ))}
-    </ul>
-  </div>
-);
+import Footer from "./component/Footer";
+import AnecdoteList from "./component/AnecdoteList";
 
 const CreateNew = (props) => {
   const [content, setContent] = useState("");
