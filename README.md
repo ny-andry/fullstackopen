@@ -9,7 +9,7 @@
 - [x] Part 4
 - [x] Part 5
 - [ ] Part 6 (Working 📌)
-- [ ] Part 7
+- [ ] Part 7 (Working 📌)
 - [ ] Part 8
 - [ ] Part 9
 - [ ] Part 10
