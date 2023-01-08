@@ -1,6 +1,7 @@
 import { useState } from "react";
 import About from "./component/About";
 import Menu from "./component/Menu";
+import Footer from "./Footer";
 
 const AnecdoteList = ({ anecdotes }) => (
   <div>
@@ -10,17 +11,6 @@ const AnecdoteList = ({ anecdotes }) => (
         <li key={anecdote.id}>{anecdote.content}</li>
       ))}
     </ul>
-  </div>
-);
-
-const Footer = () => (
-  <div>
-    Anecdote app for <a href="https://fullstackopen.com/">Full Stack Open</a>.
-    See{" "}
-    <a href="https://github.com/fullstack-hy2020/routed-anecdotes/blob/master/src/App.js">
-      https://github.com/fullstack-hy2020/routed-anecdotes/blob/master/src/App.js
-    </a>{" "}
-    for the source code.
   </div>
 );
 
