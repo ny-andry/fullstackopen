@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 
-const UniqueAnecdote = ({ anecdotes }) => {
+const Anecdote = ({ anecdotes }) => {
   const id = useParams().id;
   const anecdote = anecdotes.find((n) => n.id === Number(id));
 
@@ -15,4 +15,4 @@ const UniqueAnecdote = ({ anecdotes }) => {
   );
 };
 
-export default UniqueAnecdote;
+export default Anecdote;
