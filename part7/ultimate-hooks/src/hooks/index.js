@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import axios from "axios";
 
 const useField = (type) => {
   const [value, setValue] = useState("");
@@ -17,10 +18,19 @@ const useField = (type) => {
 const useResource = (baseUrl) => {
   const [resources, setResources] = useState([]);
 
-  // ...
+  const fetch = async (url) => {
+    const response = await axios.get(url);
+    setResources(response.data);
+    console.log(resources);
+  };
+
+  useEffect(() => {
+    fetch(baseUrl);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const create = (resource) => {
-    // ...
+    setResources([...resources, { ...resource, id: resources.length + 1 }]);
   };
 
   const service = {
