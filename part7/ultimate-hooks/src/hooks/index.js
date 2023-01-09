@@ -26,10 +26,11 @@ const useResource = (baseUrl) => {
 
   useEffect(() => {
     fetch(baseUrl);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const create = (resource) => {
+  const create = async (resource) => {
+    await axios.post(baseUrl, resource);
     setResources([...resources, { ...resource, id: resources.length + 1 }]);
   };
 
