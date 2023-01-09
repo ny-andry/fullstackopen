@@ -18,6 +18,12 @@ const CreateNew = ({ addNew }) => {
     navigate("/");
   };
 
+  const handleReset = (e) => {
+    content.onChange(e, true);
+    author.onChange(e, true);
+    info.onChange(e, true);
+  };
+
   return (
     <div>
       <h2>create a new anecdote</h2>
@@ -34,7 +40,8 @@ const CreateNew = ({ addNew }) => {
           url for more info
           <input {...info} />
         </div>
-        <button>create</button>
+        <button type="button" onClick={handleSubmit}>create</button>
+        <button type="button" onClick={handleReset}>reset</button>
       </form>
     </div>
   );
